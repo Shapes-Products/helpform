@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>General Help Ticket - Shapes Products Pvt. Ltd.</title>
+<!-- Add Select2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f7f7; /* Light cream color */
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+  h1 {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    position: relative;
+    animation: moveLeftRight 5s linear infinite alternate;
+  }
+  h2 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 0;
+    text-align: center;
+  }
+  .company-name {
+    color: #f9ca24; /* Golden color */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  @keyframes moveLeftRight {
+    0% {
+      left: -5px;
+    }
+    50% {
+      left: 100px;
+    }
+    100% {
+      left: -10px;
+    }
+  }
+  select, input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  textarea {
+    width: calc(100% - 22px);
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 class="company-name">Shapes Products Pvt. Ltd.</h1>
+  <h2>GENERAL HELP TICKET</h2>
+  <form id="helpForm" onsubmit="event.preventDefault(); helpForm();">
+    <label for="department">Department(From which department do you want help?)</label>
+    <select id="department" name="department" onchange="populateEmployees()" class="js-example-basic-single">
+      <option value="">Select Department</option>
+      <option value="ACCOUNTS">ACCOUNTS</option>
+      <option value="HR">HR</option>
+      <option value="OFFICE">OFFICE</option>
+      <option value="DISPATCH">DISPATCH</option>
+      <option value="PACKING">PACKING</option>
+      <option value="WORKSHOP">WORKSHOP</option>
+      <option value="STORE">STORE</option>
+      <option value="QUALITY">QUALITY</option>
+      <option value="POLISH">POLISH</option>
+    </select>
+    <br>
+    <br>
+    <label for="employee">Employee</label>
+    <select id="employee" name="employee" class="js-example-basic-single">
+      <option value="">Select Employee</option>
+    </select>
+    <br>
+    <br>
+    <label for="query">Query</label>
+    <textarea id="query" name="query" placeholder="Type your query here..."></textarea>
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" placeholder="Your Name" required>
+    <label for="mobile">Mobile Number:</label>
+    <input type="text" id="mobile" name="mobile" placeholder="Mobile Number" pattern="[0-9]{10}" required>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+<!-- Add jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Add Select2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+// Initialize Select2 for the dropdowns
+$(document).ready(function() {
+  $('.js-example-basic-single').select2();
+});
+
+function populateEmployees() {
+  var department = document.getElementById("department").value;
+  var employeeSelect = document.getElementById("employee");
+  employeeSelect.innerHTML = "";
+  var employees = [];
+  switch(department) {
+    case "ACCOUNTS":
+      employees = ["NAGESHWAR MISHRA", "MANISH", "DEEPAK"];
+      break;
+    case "HR":
+      employees = ["AMIT SHARMA", "HEMANT"];
+      break;
+    case "OFFICE":
+      employees = ["PRIYA(EA)", "LALITA(EA)", "VARSHA(CO. CRM)", "KIRAN(CO. CRM)", "SANDEEP BARDHAN(MIS)", "NITIN (MIS)", "SANDEEP (MIS)", "DEEPAK(DEO)", "DEEPAK(DEO)", "ASHA(PC)", "SUSHILA(PC)", "ARUN(SALES)", "SURJEET(DEO)", "SAHIL(DEO)"];
+      break;
+    case "DISPATCH":
+      employees = ["RINKU", "ASHISH", "SHILESH(DEO)"];
+      break;
+    case "PACKING":
+      employees = ["GAURAV", "SHIV SHANKAR", "RAJESH KR.(SUPERVISOR)"];
+      break;
+    case "WORKSHOP":
+      employees = ["ANKIT CHAUHAN", "NAVNEET JAGDEVA", "SAURABH"];
+      break;
+    case "STORE":
+      employees = ["JATIN", "NEERAJ"];
+      break;
+    case "QUALITY":
+      employees = ["DEEPAK"];
+      break;
+    case "POLISH":
+      employees = ["ASHOK"];
+      break;
+    default:
+      break;
+  }
+  for (var i = 0; i < employees.length; i++) {
+    var option = document.createElement("option");
+    option.text = employees[i];
+    employeeSelect.add(option);
+  }
+}
+
+function helpForm() {
+  $.ajax({
+    url: 'https://script.google.com/macros/s/AKfycbxUm4nN4bMaiqR09Q5NexE6NC3w3UcAhwyuQ1U0JthMkUNq4pYJKzs9DoJRFczCn3Xn/exec',
+    method: 'POST',
+    data: $('#helpForm').serialize(),
+    success: function(response) {
+      alert('Your query has been submitted successfully!');
+      // Reset the form after successful submission
+      document.getElementById("helpForm").reset();
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+      alert('An error occurred while submitting your query. Please try again later.');
+    }
+  });
+}
+</script>
+<footer>
+    &copy; 2024 Shapes Proudcts Pvt. Ltd. All rights reserved.
+</footer>
+</body>
+</html>
