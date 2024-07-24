@@ -74,7 +74,7 @@ body {
     font-size: 16px;
     margin-left: 10px;
   }
-  input[type="submit"] {
+  input[type="submit"], button[type="reset"] {
     background-color: #4CAF50;
     color: white;
     padding: 15px 20px;
@@ -84,7 +84,7 @@ body {
     font-size: 16px;
     margin-left: 10px;
   }
-  input[type="submit"]:hover {
+  input[type="submit"]:hover, button[type="reset"]:hover {
     background-color: #45a049;
   }
   #loading {
@@ -141,6 +141,7 @@ body {
     <label for="mobile">Mobile Number:</label>
     <input type="text" id="mobile" name="mobile" placeholder="Mobile Number" pattern="[0-9]{10}" required>
     <input type="submit" id="submitBtn" value="Submit">
+    <button type="button" onclick="resetForm()" style="background-color: #4CAF50; color: white; border: none; border-radius: 5px; padding: 15px 20px; cursor: pointer; font-size: 16px; margin-left: 10px;">Reset</button>
     <div id="loading" style="display: none;"><i class="fas fa-circle-notch fa-spin"></i> Submitting...</div>
   </form>
 </div>
@@ -212,7 +213,7 @@ function helpForm() {
       $('#loading').hide(); // Hide loading indicator on success
       $('#submitBtn').prop('disabled', false); // Enable submit button
       alert('Your query has been submitted successfully!');
-      document.getElementById("helpForm").reset(); // Reset the form after successful submission
+      resetForm(); // Reset the form after successful submission
     },
     error: function(xhr, status, error) {
       $('#loading').hide(); // Hide loading indicator on error
@@ -221,6 +222,13 @@ function helpForm() {
       alert('An error occurred while submitting your query. Please try again later.');
     }
   });
+}
+
+function resetForm() {
+  // Reset form fields
+  document.getElementById("helpForm").reset();
+  // Reset Select2 dropdowns
+  $('.js-example-basic-single').val(null).trigger('change');
 }
 </script>
 <footer>
